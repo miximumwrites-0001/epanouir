@@ -2,23 +2,26 @@
 <html>
 <head>
   <title>Epanouir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #dce35b, #45b649);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #dce35b, #45b649);
       color: #333;
     }
 
     header {
       text-align: center;
-      padding: 40px 20px;
+      padding: 50px 20px;
       color: white;
     }
 
     h1 {
       margin: 0;
-      font-size: 40px;
+      font-size: 42px;
+      letter-spacing: 1px;
     }
 
     .container {
@@ -29,33 +32,49 @@
 
     .card {
       background: white;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 25px;
+      border-radius: 18px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
     }
 
     textarea, input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      box-sizing: border-box;
     }
 
     button {
-      margin-top: 10px;
-      padding: 10px 15px;
+      margin-top: 12px;
+      padding: 10px 18px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background: #45b649;
       color: white;
+      font-size: 14px;
       cursor: pointer;
+      transition: background 0.2s ease;
     }
 
     button:hover {
       background: #379f3d;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-top: 8px;
     }
   </style>
 </head>
@@ -64,7 +83,7 @@
 
   <header>
     <h1>Epanouir 🌿</h1>
-    <p>Your personal growth space</p>
+    <p>Your personal growth dashboard</p>
   </header>
 
   <div class="container">
@@ -72,13 +91,14 @@
     <div class="card">
       <h2>📝 Journal</h2>
       <textarea rows="5" placeholder="Write your thoughts here..."></textarea>
-      <button>Save</button>
+      <button>Save Entry</button>
     </div>
 
     <div class="card">
       <h2>✅ To-Do List</h2>
-      <input type="text" placeholder="Add a task...">
-      <button>Add Task</button>
+      <input type="text" id="taskInput" placeholder="Add a task...">
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
     </div>
 
     <div class="card">
@@ -87,6 +107,21 @@
     </div>
 
   </div>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+
+      if (taskText === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = taskText;
+
+      document.getElementById("taskList").appendChild(li);
+      input.value = "";
+    }
+  </script>
 
 </body>
 </html>
